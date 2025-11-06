@@ -6,7 +6,14 @@ const nextConfig = {
     config.externals = [...(config.externals || []), { canvas: 'canvas' }];
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/SYNO/:path*',
+        destination: 'https://testsyno-pbwh.vercel.app/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
-
