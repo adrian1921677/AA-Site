@@ -6,7 +6,7 @@ const nextConfig = {
     config.externals = [...(config.externals || []), { canvas: 'canvas' }];
     return config;
   },
-  // Rewrite entfernt - wird jetzt über Middleware gehandhabt
+  // Keine Rewrites oder Middleware nötig - SYNO läuft auf Subdomain syno.abdullahu-adrian.de
 }
 
 module.exports = nextConfig
