@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color System - Black & White & Gray Only */
+  --color-background: #000000;
+  --color-background-secondary: #0a0a0a;
+  --color-background-tertiary: #1a1a1a;
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a3a3a3;
+  --color-text-tertiary: #737373;
+  
+  --color-border: #262626;
+  --color-border-hover: #404040;
+  
+  /* Typography - Unified Modern Font */
+  --font-primary: var(--font-primary), system-ui, -apple-system, sans-serif;
+  
+  /* Spacing Scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  
+  /* Shadows - Soft, subtle */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-text-primary antialiased;
+    font-family: var(--font-primary);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar - subtle */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-text-tertiary rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-text-secondary;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Card styles */
+  .card {
+    @apply bg-background-secondary/50 backdrop-blur-sm border border-border rounded-xl p-6;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-hover {
+    @apply hover:border-text-secondary hover:shadow-lg;
+  }
+  
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 bg-text-primary text-background font-medium rounded-lg;
+    @apply hover:bg-text-secondary transition-all duration-300;
+    @apply shadow-md;
+    font-family: var(--font-primary);
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 border border-border text-text-secondary font-medium rounded-lg;
+    @apply hover:border-text-primary hover:text-text-primary transition-all duration-300;
+    @apply bg-background-secondary/50 backdrop-blur-sm;
+    font-family: var(--font-primary);
+  }
+  
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 bg-background-secondary/50 backdrop-blur-sm border border-border rounded-lg;
+    @apply focus:outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20;
+    @apply transition-all duration-300 text-text-primary placeholder-text-tertiary;
+    font-family: var(--font-primary);
+  }
+  
+  /* Section spacing */
+  .section {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-content {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  /* Typography scale - All using unified font */
+  .heading-1 {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+    font-family: var(--font-primary);
+  }
+  
+  .heading-2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+    font-family: var(--font-primary);
+  }
+  
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-semibold;
+    font-family: var(--font-primary);
+  }
+  
+  .body-large {
+    @apply text-lg md:text-xl text-text-secondary leading-relaxed;
+    font-family: var(--font-primary);
+  }
+  
+  .body {
+    @apply text-base text-text-secondary leading-relaxed;
+    font-family: var(--font-primary);
+  }
+  
+  .caption {
+    @apply text-sm text-text-tertiary;
+    font-family: var(--font-primary);
+  }
+}
+
+/* Smooth animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
