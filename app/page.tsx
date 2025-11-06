@@ -141,7 +141,7 @@ export default function Home() {
                   >
                     2019
                   </motion.div>
-                  <div className="caption text-text-secondary">Seit dem am Koden</div>
+                  <div className="caption text-text-secondary">Seit dem am Coden</div>
                 </motion.div>
               </div>
 
