@@ -19,7 +19,7 @@ const projects: Project[] = [
     description: "Ein moderner intelligenter Taschenrechner",
     tech: [],
     image: "/syno.png",
-    link: "https://www.abdullahu-adrian.de/SYNO",
+    link: "https://syno.abdullahu-adrian.de",
   },
 ];
 
