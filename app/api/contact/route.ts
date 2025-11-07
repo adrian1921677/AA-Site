@@ -25,10 +25,9 @@ export async function POST(request: NextRequest) {
     }
 
     // E-Mail senden
-    // Für Test-Modus: Verwende info@abdullahu-drive.de als Empfänger
-    // Für Produktion: Verwende verifizierte Domain
-    const contactEmail = process.env.CONTACT_EMAIL || 'info@abdullahu-drive.de';
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    // Verwende verifizierte Domain abdullahu-adrian.de
+    const contactEmail = process.env.CONTACT_EMAIL || 'info@abdullahu-adrian.de';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'kontakt@abdullahu-adrian.de';
     
     const { data, error } = await resend.emails.send({
       from: `Portfolio Kontakt <${fromEmail}>`,
