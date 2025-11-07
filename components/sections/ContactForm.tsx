@@ -17,16 +17,33 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simuliere Formularversand
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", message: "" });
-    }, 3000);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Fehler beim Senden der Nachricht');
+      }
+
+      setIsSubmitting(false);
+      setSubmitted(true);
+      
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: "", email: "", message: "" });
+      }, 3000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setIsSubmitting(false);
+      alert('Fehler beim Senden der Nachricht. Bitte versuche es später erneut.');
+    }
   };
 
   return (

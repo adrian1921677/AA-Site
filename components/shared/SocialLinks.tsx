@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon, EnvelopeClosedIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 
 const socialLinks = [
-  { name: "GitHub", icon: GitHubLogoIcon, href: "https://github.com" },
-  { name: "LinkedIn", icon: LinkedInLogoIcon, href: "https://linkedin.com" },
-  { name: "Twitter", icon: TwitterLogoIcon, href: "https://twitter.com" },
-  { name: "Email", icon: EnvelopeClosedIcon, href: "mailto:contact@example.com" },
+  { name: "GitHub", icon: GitHubLogoIcon, href: "https://github.com/adrian1921677" },
+  { name: "LinkedIn", icon: LinkedInLogoIcon, href: "https://www.linkedin.com/in/adrian-abdullahu-7b2ab635b" },
 ];
 
 export default function SocialLinks() {
