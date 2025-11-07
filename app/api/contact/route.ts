@@ -25,10 +25,14 @@ export async function POST(request: NextRequest) {
     }
 
     // E-Mail senden
-    // Versuche zuerst mit der verifizierten Domain, falls das fehlschlägt, nutze onboarding@resend.dev
+    // Für Test-Modus: Verwende info@abdullahu-drive.de als Empfänger
+    // Für Produktion: Verwende verifizierte Domain
+    const contactEmail = process.env.CONTACT_EMAIL || 'info@abdullahu-drive.de';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Kontakt <onboarding@resend.dev>',
-      to: [process.env.CONTACT_EMAIL || 'adrian@abdullahu-adrian.de'],
+      from: `Portfolio Kontakt <${fromEmail}>`,
+      to: [contactEmail],
       replyTo: email,
       subject: `Neue Nachricht von ${name} - Portfolio Kontakt`,
       html: `
