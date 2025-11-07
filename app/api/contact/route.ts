@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
+    // Prüfe ob API Key gesetzt ist
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY ist nicht gesetzt');
+      return NextResponse.json(
+        { error: 'E-Mail-Service ist nicht konfiguriert. Bitte kontaktiere den Administrator.' },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await request.json();
     const { name, email, message } = body;
 
@@ -18,8 +26,8 @@ export async function POST(request: NextRequest) {
 
     // E-Mail senden
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Kontakt <onboarding@resend.dev>', // TODO: Deine verifizierte Domain verwenden
-      to: [process.env.CONTACT_EMAIL || 'adrian@abdullahu-adrian.de'], // Deine E-Mail-Adresse
+      from: 'Portfolio Kontakt <onboarding@resend.dev>',
+      to: [process.env.CONTACT_EMAIL || 'adrian@abdullahu-adrian.de'],
       replyTo: email,
       subject: `Neue Nachricht von ${name} - Portfolio Kontakt`,
       html: `
@@ -43,7 +51,10 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Resend error:', error);
       return NextResponse.json(
-        { error: 'Fehler beim Senden der E-Mail' },
+        { 
+          error: 'Fehler beim Senden der E-Mail',
+          details: process.env.NODE_ENV === 'development' ? error : undefined
+        },
         { status: 500 }
       );
     }
@@ -54,8 +65,12 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Contact form error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Ein Fehler ist aufgetreten';
     return NextResponse.json(
-      { error: 'Ein Fehler ist aufgetreten' },
+      { 
+        error: 'Ein Fehler ist aufgetreten',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      },
       { status: 500 }
     );
   }

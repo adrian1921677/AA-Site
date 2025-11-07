@@ -42,7 +42,8 @@ export default function ContactForm() {
     } catch (error) {
       console.error('Form submission error:', error);
       setIsSubmitting(false);
-      alert('Fehler beim Senden der Nachricht. Bitte versuche es später erneut.');
+      const errorMessage = error instanceof Error ? error.message : 'Fehler beim Senden der Nachricht. Bitte versuche es später erneut.';
+      alert(errorMessage);
     }
   };
 
