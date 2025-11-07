@@ -25,8 +25,9 @@ export async function POST(request: NextRequest) {
     }
 
     // E-Mail senden
+    // Versuche zuerst mit der verifizierten Domain, falls das fehlschlägt, nutze onboarding@resend.dev
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Kontakt <kontakt@abdullahu-adrian.de>',
+      from: 'Portfolio Kontakt <onboarding@resend.dev>',
       to: [process.env.CONTACT_EMAIL || 'adrian@abdullahu-adrian.de'],
       replyTo: email,
       subject: `Neue Nachricht von ${name} - Portfolio Kontakt`,
@@ -49,11 +50,11 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error('Resend error:', error);
+      console.error('Resend error:', JSON.stringify(error, null, 2));
       return NextResponse.json(
         { 
           error: 'Fehler beim Senden der E-Mail',
-          details: process.env.NODE_ENV === 'development' ? error : undefined
+          details: error
         },
         { status: 500 }
       );
