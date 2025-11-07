@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     // E-Mail senden
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Kontakt <onboarding@resend.dev>',
+      from: 'Portfolio Kontakt <kontakt@abdullahu-adrian.de>',
       to: [process.env.CONTACT_EMAIL || 'adrian@abdullahu-adrian.de'],
       replyTo: email,
       subject: `Neue Nachricht von ${name} - Portfolio Kontakt`,
